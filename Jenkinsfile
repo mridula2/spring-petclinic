@@ -99,7 +99,7 @@ spec:
             //}
           //} 
           echo "Unit/Integration test"
-        //}
+        }
         stage('Static Code Analysis') {
           //steps {
             //container('maven') {
@@ -113,8 +113,8 @@ spec:
               //}
             //}
           //}
-        //}  
-        echo "Sonarcube test"  
+          echo "Sonarcube test"
+        }            
       }
     }
     stage('Containerize') {
