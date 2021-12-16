@@ -79,7 +79,8 @@ spec:
     stage('Test') {
       parallel {
         stage(' Unit/Integration Tests') {
-          //steps {
+          steps {
+            echo "Unit/Integration test"
             //container('maven') {
               //sh """
                 //mvn -B -ntp -T 2 test -DAPP_VERSION=${APP_VER}
@@ -97,11 +98,11 @@ spec:
               //archiveArtifacts artifacts: 'target/**/*.jar', fingerprint: true
               //junit 'target/surefire-reports/**/*.xml'
             //}
-          //} 
-          echo "Unit/Integration test"
+          //}           
         }
         stage('Static Code Analysis') {
-          //steps {
+          steps {
+            echo "Sonarcube test"
             //container('maven') {
               //withSonarQubeEnv('My SonarQube') { 
                 //sh """
@@ -112,8 +113,7 @@ spec:
                 //"""
               //}
             //}
-          //}
-          echo "Sonarcube test"
+          }          
         }            
       }
     }
