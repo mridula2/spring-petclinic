@@ -98,7 +98,7 @@ spec:
               //archiveArtifacts artifacts: 'target/**/*.jar', fingerprint: true
               //junit 'target/surefire-reports/**/*.xml'
             //}
-          //}           
+          }           
         }
         stage('Static Code Analysis') {
           steps {
