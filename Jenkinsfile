@@ -98,7 +98,7 @@ spec:
               //junit 'target/surefire-reports/**/*.xml'
             //}
           //} 
-          echo sh(Unit/Integration test)
+          echo "Unit/Integration test"
         //}
         stage('Static Code Analysis') {
           //steps {
@@ -114,7 +114,7 @@ spec:
             //}
           //}
         //}  
-        echo sh(Sonarcube test)  
+        echo "Sonarcube test"  
       }
     }
     stage('Containerize') {
