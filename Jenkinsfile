@@ -76,9 +76,9 @@ spec:
         }
       }
     }
-    //stage('Test') {
-      //parallel {
-        //stage(' Unit/Integration Tests') {
+    stage('Test') {
+      parallel {
+        stage(' Unit/Integration Tests') {
           //steps {
             //container('maven') {
               //sh """
@@ -98,8 +98,9 @@ spec:
               //junit 'target/surefire-reports/**/*.xml'
             //}
           //} 
+          echo sh(Unit/Integration test)
         //}
-        //stage('Static Code Analysis') {
+        stage('Static Code Analysis') {
           //steps {
             //container('maven') {
               //withSonarQubeEnv('My SonarQube') { 
@@ -113,8 +114,9 @@ spec:
             //}
           //}
         //}  
-      //}
-    //}
+        echo sh(Sonarcube test)  
+      }
+    }
     stage('Containerize') {
       steps {
         container('kaniko') {
