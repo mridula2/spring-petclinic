@@ -127,8 +127,9 @@ spec:
     }
     stage('Image Vulnerability Scan') {
       steps {
-        writeFile file: 'anchore_images', text: "${env.HARBOR_URL}/library/samples/spring-petclinic:v1.0.${env.BUILD_ID}"
-        anchore name: 'anchore_images'
+        echo "Image Vulnerability Scan"
+        //writeFile file: 'anchore_images', text: "${env.HARBOR_URL}/library/samples/spring-petclinic:v1.0.${env.BUILD_ID}"
+        //anchore name: 'anchore_images'
       }
     }
     stage('Approval') {
