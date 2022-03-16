@@ -81,38 +81,38 @@ spec:
         stage(' Unit/Integration Tests') {
           steps {
             echo "Unit/Integration test"
-            //container('maven') {
-              //sh """
-                //mvn -B -ntp -T 2 test -DAPP_VERSION=${APP_VER}
-              //"""
-            //}
-            //jacoco ( 
-              //execPattern: 'target/*.exec',
-              //classPattern: 'target/classes',
-              //sourcePattern: 'src/main/java',
-              //exclusionPattern: 'src/test*'
-            //)
-          //}
-          //post {
-            //always {
-              //archiveArtifacts artifacts: 'target/**/*.jar', fingerprint: true
-              //junit 'target/surefire-reports/**/*.xml'
-            //}
+            container('maven') {
+              sh """
+                mvn -B -ntp -T 2 test -DAPP_VERSION=${APP_VER}
+              """
+            }
+            jacoco ( 
+              execPattern: 'target/*.exec',
+              classPattern: 'target/classes',
+              sourcePattern: 'src/main/java',
+              exclusionPattern: 'src/test*'
+            )
+          }
+          post {
+            always {
+              archiveArtifacts artifacts: 'target/**/*.jar', fingerprint: true
+              junit 'target/surefire-reports/**/*.xml'
+            }
           }           
         }
         stage('Static Code Analysis') {
           steps {
             echo "Sonarcube test"
-            //container('maven') {
-              //withSonarQubeEnv('My SonarQube') { 
-                //sh """
-                //mvn sonar:sonar \
-                  //-Dsonar.projectKey=spring-petclinic \
-                  //-Dsonar.host.url=${env.SONAR_HOST_URL} \
-                  //-Dsonar.login=${env.SONAR_AUTH_TOKEN}
-                //"""
-              //}
-            //}
+            container('maven') {
+              withSonarQubeEnv('My SonarQube') { 
+                sh """
+                mvn sonar:sonar \
+                  -Dsonar.projectKey=spring-petclinic \
+                  -Dsonar.host.url=${env.SONAR_HOST_URL} \
+                  -Dsonar.login=${env.SONAR_AUTH_TOKEN}
+                """
+              }
+            }
           }          
         }            
       }
@@ -128,8 +128,8 @@ spec:
     stage('Image Vulnerability Scan') {
       steps {
         echo "Image Vulnerability Scan"
-        //writeFile file: 'anchore_images', text: "${env.HARBOR_URL}/library/samples/spring-petclinic:v1.0.${env.BUILD_ID}"
-        //anchore name: 'anchore_images'
+        writeFile file: 'anchore_images', text: "${env.HARBOR_URL}/library/samples/spring-petclinic:v1.0.${env.BUILD_ID}"
+        anchore name: 'anchore_images'
       }
     }
     stage('Approval') {
